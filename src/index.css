@@ -14,11 +14,37 @@
   --purple-dark: #5739d3;
 }
 
-* { box-sizing: border-box; }
-html, body, #root { width: 100%; height: 100%; }
-html, body { overflow: hidden; }
-body { margin: 0; min-width: 320px; }
-button, input, select { font: inherit; }
-button { cursor: pointer; }
-button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #c9bfff; outline-offset: 2px; }
-a { color: inherit; }
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+html,
+body {
+  overflow: hidden;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #c9bfff;
+  outline-offset: 2px;
+}
+a {
+  color: inherit;
+}
