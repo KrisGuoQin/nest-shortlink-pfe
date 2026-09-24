@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import {
+  accessErrorMessage,
   accessRequest,
   readAccessSession,
   saveAccessSession,
@@ -41,9 +42,7 @@ export default function AccessLoginPage() {
       .catch((cause: unknown) => {
         if (!active) return
         setChecking(false)
-        const message = cause instanceof Error ? cause.message : '无法验证当前账号。'
-        if (/登录状态已过期/.test(message)) setError('登录状态已过期，请重新登录后继续访问。')
-        else setError('当前账号没有访问此短链的权限，请使用有权限的账号登录。')
+        setError(accessErrorMessage(cause, true))
       })
     return () => {
       active = false
@@ -86,11 +85,7 @@ export default function AccessLoginPage() {
       )
       window.location.replace(result.url)
     } catch (cause) {
-      setError(
-        cause instanceof Error && /登录状态已过期/.test(cause.message)
-          ? cause.message
-          : '登录成功，但当前账号没有访问此短链的权限。',
-      )
+      setError(accessErrorMessage(cause, true))
     } finally {
       setBusy(false)
     }

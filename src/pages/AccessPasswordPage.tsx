@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { accessRequest, readAccessSession, type AccessResult } from './accessApi'
+import {
+  accessErrorMessage,
+  accessRequest,
+  readAccessSession,
+  type AccessResult,
+} from './accessApi'
 
 type UnlockResult = { unlock: true; token: string; expiresIn: number }
 
@@ -68,9 +73,7 @@ export default function AccessPasswordPage() {
       setError(
         cause instanceof Error && /Invalid share password/.test(cause.message)
           ? '密码不正确，请重试。'
-          : cause instanceof Error
-            ? cause.message
-            : '解锁失败，请重试。',
+          : accessErrorMessage(cause),
       )
     } finally {
       setBusy(false)
